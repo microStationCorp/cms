@@ -11,7 +11,6 @@ const HomePage = () => {
     <SafeAreaView>
       <SearchBar />
       <Text>main page</Text>
-      <SignOut />
       <Text>{JSON.stringify(user, null, 2)}</Text>
     </SafeAreaView>
   );

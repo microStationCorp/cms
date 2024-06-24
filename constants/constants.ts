@@ -1,7 +1,7 @@
 import { Colors } from "./colors";
 
 export const TokenColors = {
-  error: Colors.ORANGE_RED,
+  error: Colors.CRIMSON,
   success: Colors.LIME_GREEN,
   link:Colors.LINK
 };

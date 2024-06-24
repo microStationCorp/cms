@@ -39,7 +39,7 @@ const SearchBar = () => {
       />
 
       {isSignedIn ? (
-        <Pressable>
+        <Pressable onPress={() => router.push("(main)/(profile)/")}>
           <Image
             source={{
               uri: user?.imageUrl,

@@ -10,8 +10,11 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { SignOut } from "./signOutComp";
+import { TokenFontSize } from "@/constants/constants";
+import { useUser } from "@clerk/clerk-expo";
 
-const CustomDrawerContent = (props: any) => {
+export const CustomDrawerContent = (props: any) => {
+  const { isSignedIn } = useUser();
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View
@@ -22,17 +25,17 @@ const CustomDrawerContent = (props: any) => {
           alignItems: "center",
         }}
       >
-        <Text>Exam-App</Text>
+        <Text style={{ fontSize: TokenFontSize.lg }}>CMS</Text>
         <Text>version : 1.0.0</Text>
       </View>
       <DrawerContentScrollView {...props} scrollEnabled={false}>
         <DrawerItemList {...props} />
       </DrawerContentScrollView>
-      <View>
-        <SignOut />
-      </View>
+      {isSignedIn && (
+        <View style={{ alignItems: "center", marginBottom: 10 }}>
+          <SignOut />
+        </View>
+      )}
     </SafeAreaView>
   );
 };
-
-export default CustomDrawerContent;

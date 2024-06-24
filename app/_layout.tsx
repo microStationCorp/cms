@@ -2,16 +2,33 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
-import { ClerkProvider } from "@clerk/clerk-expo";
+import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
 import Constants from "expo-constants";
 import { tokenCache } from "@/lib/tokenCache";
-import { Stack } from "expo-router";
+import { Stack, useRouter, useSegments } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 const MainLayout = () => {
+  const { isLoaded, isSignedIn } = useAuth();
+  const segments = useSegments();
+  const router = useRouter();
+
+  useEffect(() => {
+    const inAuthPage = segments[0] == "(main)";
+    if (isSignedIn == false && inAuthPage) {
+      router.replace("/");
+    } else if (isSignedIn) {
+      router.replace("(main)/");
+    }
+  }, [isSignedIn]);
+
+  if (!isLoaded) {
+    return null;
+  }
+
   return (
     <Stack>
       <Stack.Screen name="(main)" options={{ headerShown: false }} />
