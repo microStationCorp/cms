@@ -3,12 +3,16 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { TokenFontSize } from "@/constants/constants";
-import { useNavigation } from "expo-router";
+import { router, useNavigation } from "expo-router";
 import { DrawerActions } from "@react-navigation/native";
 import { Colors } from "@/constants/colors";
+import { useUser } from "@clerk/clerk-expo";
+import { Image } from "expo-image";
 
 const SearchBar = () => {
   const navigation = useNavigation();
+  const { isSignedIn, user } = useUser();
+
   return (
     <View
       style={{
@@ -33,7 +37,32 @@ const SearchBar = () => {
         placeholder="Search Coach"
         style={{ fontSize: TokenFontSize.base, flex: 1 }}
       />
-      <FontAwesome6 name="user-circle" size={24} color={Colors.SLATE_GRAY} />
+
+      {isSignedIn ? (
+        <Pressable>
+          <Image
+            source={{
+              uri: user?.imageUrl,
+            }}
+            contentFit="contain"
+            transition={1000}
+            style={{
+              width: 28,
+              height: 28,
+              borderRadius: 30,
+            }}
+            placeholder={user?.username}
+          />
+        </Pressable>
+      ) : (
+        <Pressable onPress={() => router.push("(auth)/")}>
+          <FontAwesome6
+            name="user-circle"
+            size={24}
+            color={Colors.SLATE_GRAY}
+          />
+        </Pressable>
+      )}
     </View>
   );
 };

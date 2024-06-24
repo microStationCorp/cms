@@ -13,6 +13,7 @@ const MainGroupLayout = () => {
           },
           drawerType: "slide",
           drawerActiveTintColor: Colors.BLACK,
+          overlayColor: "transparent",
         }}
       >
         <Drawer.Screen
