@@ -1,7 +1,14 @@
 import React from "react";
-import { Slot } from "expo-router";
+import { Redirect, Slot } from "expo-router";
+import { useUser } from "@clerk/clerk-expo";
 
 const ProfileLayout = () => {
+  const { isSignedIn } = useUser();
+
+  if (!isSignedIn) {
+    return <Redirect href={"(auth)/"} />;
+  }
+  
   return <Slot />;
 };
 

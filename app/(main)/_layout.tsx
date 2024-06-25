@@ -2,7 +2,7 @@ import React from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
 import { Colors } from "@/constants/colors";
-import {CustomDrawerContent} from "@/components/customDrawerContent";
+import { CustomDrawerContent } from "@/components/customDrawerContent";
 
 const MainGroupLayout = () => {
   return (
@@ -23,6 +23,12 @@ const MainGroupLayout = () => {
           options={{
             title: "Home",
             headerShown: false,
+          }}
+        />
+        <Drawer.Screen
+          name="(coachList)"
+          options={{
+            title: "Coach List",
           }}
         />
         <Drawer.Screen

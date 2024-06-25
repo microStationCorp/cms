@@ -31,7 +31,7 @@ export const Colors = {
   SKY_BLUE: "#87CEEB",
   SNOW: "#FFFAFA",
   HONEY_DEW: "#F0FFF0",
-  MINT_CREQAM: "#F5FFFA",
+  MINT_CREAM: "#F5FFFA",
   ALICE_BLUE: "#F0F8FF",
   WHITE_SMOKE: "#F5F5F5",
   GAINSBORO: "#DCDCDC",

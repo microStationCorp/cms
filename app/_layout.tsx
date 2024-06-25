@@ -7,6 +7,8 @@ import Constants from "expo-constants";
 import { tokenCache } from "@/lib/tokenCache";
 import { Stack, useRouter, useSegments } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { ApolloProvider } from "@apollo/client";
+import { client } from "@/lib/apolloClient";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -59,9 +61,11 @@ export default function RootLayout() {
       publishableKey={Constants.expoConfig?.extra!.clerkPublishableKey}
       tokenCache={tokenCache}
     >
-      <SafeAreaProvider>
-        <MainLayout />
-      </SafeAreaProvider>
+      <ApolloProvider client={client}>
+        <SafeAreaProvider>
+          <MainLayout />
+        </SafeAreaProvider>
+      </ApolloProvider>
     </ClerkProvider>
   );
 }
